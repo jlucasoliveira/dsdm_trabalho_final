@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name">Me Empresta</string>
+    <string name="settings">Configurações</string>
+    <string name="nothing">NADA</string>
+    <string name="txt_what_do_now">O que você precisa ou pode oferecer hoje?</string>
+    <string name="txt_borrow_tool">Pedir objeto emprestado</string>
+    <string name="txt_help">Pedir ajuda à alguém</string>
+    <string name="txt_group_workout">Companhia para exercício</string>
+    <string name="txt_ask_ride">Oferecer carona</string>
+    <string name="txt_share_food">Compartilhar comida</string>
+    <string name="txt_invite_fried">Convidar vizinhos</string>
+    <string name="txt_donate_gift">Doar objeto</string>
+    <string name="txt_other">Outro</string>
+</resources>
