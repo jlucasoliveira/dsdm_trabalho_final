@@ -1,5 +1,8 @@
 package br.ufc.quixada.dsdm.meempresta;
 
+import android.content.Intent;
+import android.view.Menu;
+import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -16,6 +19,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     private final ViewHolder mViewHolder = new ViewHolder();
+    protected List<Integer> mTabIcons = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,14 +34,33 @@ public class MainActivity extends AppCompatActivity {
 
     private void configTabs() {
         TabAdapter tabAdapter = new TabAdapter(this);
+
         tabAdapter.add(new FeedFragment(), R.drawable.ic_outline_home_24);
+        tabAdapter.add(new ChatFragment(), R.drawable.ic_request);
+        tabAdapter.add(new RecordFragment(), R.drawable.ic_record);
 
         this.mViewHolder.viewWrapperMain.setAdapter(tabAdapter);
 
         new TabLayoutMediator(
             this.mViewHolder.tabMainView, this.mViewHolder.viewWrapperMain,
-            (tab, position) -> tab.setIcon(tabAdapter.getTabIcons().get(position))
+            (tab, position) -> tab.setIcon(mTabIcons.get(position))
         ).attach();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.action_bar_setting) {
+            Intent intentSettingActivity = new Intent(this, SettingsActivity.class);
+            startActivity(intentSettingActivity);
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     private static class ViewHolder {
@@ -48,21 +71,16 @@ public class MainActivity extends AppCompatActivity {
     private class TabAdapter extends FragmentStateAdapter {
 
         private List<Fragment> tabs = new ArrayList<>();
-        private List<Integer> tabIcons = new ArrayList<>();
 
         public TabAdapter(@NonNull FragmentActivity fragmentActivity) {
             super(fragmentActivity);
         }
 
-        public void add(Fragment fragment, int icon){
+        public void add(Fragment fragment, Integer iconResourceId){
             this.tabs.add(fragment);
-            this.tabIcons.add(icon);
+            mTabIcons.add(iconResourceId);
         }
-
-        public List<Integer> getTabIcons() {
-            return tabIcons;
-        }
-
+        
         @NonNull
         @Override
         public Fragment createFragment(int position) {
@@ -73,5 +91,6 @@ public class MainActivity extends AppCompatActivity {
         public int getItemCount() {
             return tabs.size();
         }
+
     }
 }
