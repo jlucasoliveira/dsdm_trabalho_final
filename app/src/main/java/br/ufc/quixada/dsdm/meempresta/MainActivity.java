@@ -10,6 +10,9 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+import br.ufc.quixada.dsdm.meempresta.fragments.ChatFragment;
+import br.ufc.quixada.dsdm.meempresta.fragments.FeedFragment;
+import br.ufc.quixada.dsdm.meempresta.fragments.RecordFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
@@ -26,8 +29,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.mViewHolder.viewWrapperMain = findViewById(R.id.view_wrapper_main);
-        this.mViewHolder.tabMainView     = findViewById(R.id.tabs_main_view);
+        mViewHolder.viewWrapperMain = findViewById(R.id.view_wrapper_main);
+        mViewHolder.tabMainView     = findViewById(R.id.tabs_main_view);
 
         configTabs();
     }
@@ -39,10 +42,10 @@ public class MainActivity extends AppCompatActivity {
         tabAdapter.add(new ChatFragment(), R.drawable.ic_request);
         tabAdapter.add(new RecordFragment(), R.drawable.ic_record);
 
-        this.mViewHolder.viewWrapperMain.setAdapter(tabAdapter);
+        mViewHolder.viewWrapperMain.setAdapter(tabAdapter);
 
         new TabLayoutMediator(
-            this.mViewHolder.tabMainView, this.mViewHolder.viewWrapperMain,
+            mViewHolder.tabMainView, this.mViewHolder.viewWrapperMain,
             (tab, position) -> tab.setIcon(mTabIcons.get(position))
         ).attach();
     }

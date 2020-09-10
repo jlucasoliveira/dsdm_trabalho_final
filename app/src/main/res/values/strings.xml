@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Me Empresta</string>
+    <string name="app_version">0.1.2</string>
+
     <string name="txt_settings">Configurações</string>
     <string name="txt_what_do_now">O que você precisa ou pode oferecer hoje?</string>
     <string name="txt_borrow_tool">Pedir objeto\nemprestado</string>
@@ -13,20 +15,27 @@
     <string name="txt_about">Sobre</string>
     <string name="txt_edit_profile">Editar perfil</string>
     <string name="txt_logoff">Sair</string>
+    <string name="txt_username">Nome de usuário</string>
+    <string name="txt_password">Senha</string>
+    <string name="txt_save">Salvar</string>
+    <string name="txt_cancel">Cancelar</string>
     <string name="txt_profile_pic">Foto do Perfil</string>
 
-    <!--_-->
+    <!--_ pedir objeto emprestado_-->
     <string name="txt_object">Objeto</string>
-    <string name="txt_hint_drilling_machine">Ex: Furadora</string>
-    <string name="txt_hint_description_object">Convença seus vizinhos: conte para eles porque precisa desse 
-        objeto e porque é importante para você.</string>
-    <string name="txt_fetch_radius">Até onde você pode ir buscar?</string>
-    <string name="btn_asking_object">Pedir emprestado</string>
+    <string name="txt_object_hint_drilling_machine">Ex: Furadora</string>
+    <string name="txt_object_hint_description">Convença seus vizinhos: conte para eles porque precisa desse
+        objeto e porque é importante para você.
+    </string>
+    <string name="txt_object_fetch_radius">Até onde você pode ir buscar?</string>
+    <string name="btn_object_asking">Pedir emprestado</string>
 
     <!--_-->
     <string name="txt_i_need">Eu preciso</string>
     <string name="txt_hint_changing_tire">Ex: Ajuda para trocar o pneu.</string>
-    <string name="txt_hint_description_help">Convença seus vizinhos: conte para eles porque precisa dessa mãozinha e como podem te ajudar</string>
+    <string name="txt_hint_description_help">Convença seus vizinhos: conte para eles porque precisa dessa mãozinha e
+        como podem te ajudar
+    </string>
     <string name="txt_request_radius">Distância para o envia do pedido</string>
     <string name="btn_asking_help">Pedir um mãozinha</string>
 
@@ -34,12 +43,11 @@
     <string name="txt_activity">Atividade</string>
     <string name="txt_hint_whant_create_running_group">Ex: Quero criar um gr</string>
 
-    <string name="title_what_you_need">O que você precisa?</string>
-    <string name="description">Descrição</string>
-    <string name="want_add_image">Quer adicionar uma imagem?</string>
+    <string name="txt_title_what_you_need">O que você precisa?</string>
+    <string name="txt_description">Descrição</string>
+    <string name="txt_want_add_image">Quer adicionar uma imagem?</string>
 
-    <string name="share_app">Compartilhar app</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="txt_share_app">Compartilhar app</string>
+    <string name="txt_request">Requisitar</string>
 
 </resources>

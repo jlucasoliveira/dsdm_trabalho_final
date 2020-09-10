@@ -1,10 +1,11 @@
-package br.ufc.quixada.dsdm.meempresta;
+package br.ufc.quixada.dsdm.meempresta.fragments;
 
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import br.ufc.quixada.dsdm.meempresta.R;
 
 /**
  * A simple {@link Fragment} subclass.

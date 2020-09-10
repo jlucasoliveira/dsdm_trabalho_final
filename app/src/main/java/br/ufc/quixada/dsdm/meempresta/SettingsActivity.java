@@ -1,5 +1,6 @@
 package br.ufc.quixada.dsdm.meempresta;
 
+import android.content.Intent;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,13 +33,19 @@ public class SettingsActivity extends AppCompatActivity {
         finish();
     }
 
-    public void onClickEditProfile(View v){}
+    public void onClickEditProfile(View v) {
+        Intent intent = new Intent(this, EditProfileActivity.class);
+        startActivity(intent);
+    }
 
-    public void onClickShareApp(View v){}
+    public void onClickShareApp(View v) {}
 
-    public void onClickAboutApp(View v){}
+    public void onClickAboutApp(View v) {
+        Intent intent = new Intent(this, AboutAppActivity.class);
+        startActivity(intent);
+    }
 
-    public void onClickLogOff(View v){}
+    public void onClickLogOff(View v) {}
 
     private static class ViewHolder {
         TextView txtEditProfile;

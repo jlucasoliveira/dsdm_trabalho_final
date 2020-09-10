@@ -16,7 +16,7 @@
             android:drawablePadding="20dp" app:drawableStartCompat="@drawable/ic_baseline_edit_24"
             android:gravity="center_vertical" android:paddingStart="20dp" android:paddingEnd="15dp"/>
     <TextView
-            android:text="@string/share_app"
+            android:text="@string/txt_share_app"
             android:layout_width="match_parent"
             android:layout_height="60dp" android:id="@+id/txt_share_app"
             app:layout_constraintTop_toBottomOf="@id/txt_profile_edit"

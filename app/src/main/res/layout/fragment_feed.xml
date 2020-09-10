@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".FeedFragment" android:id="@+id/feed_layout">
-
+        tools:context=".fragments.FeedFragment">
+<androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/feed_layout">
 
     <com.google.android.gms.maps.MapView
             android:layout_width="match_parent"
@@ -18,67 +21,78 @@
             app:layout_constraintTop_toBottomOf="@+id/map_find_neighbors" app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="16dp" android:layout_marginTop="8dp" android:textSize="18sp"
             android:textStyle="bold"/>
-    <TextView
-            android:text="@string/txt_borrow_tool"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_borrow_tool"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="18dp"
-            app:layout_constraintEnd_toStartOf="@+id/txt_help"
-            app:layout_constraintTop_toBottomOf="@+id/txt_what_do_now" android:layout_marginTop="16dp"
-            android:textAlignment="center" app:drawableTopCompat="@drawable/ic_drill"/>
-    <TextView
-            android:text="@string/txt_help"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_help"
-            app:layout_constraintStart_toEndOf="@+id/txt_borrow_tool" android:layout_marginStart="24dp"
-            app:layout_constraintEnd_toStartOf="@+id/txt_group_workout"
-            app:layout_constraintTop_toBottomOf="@+id/txt_what_do_now"
-            android:layout_marginTop="16dp" android:textAlignment="center" app:drawableTopCompat="@drawable/ic_help"/>
-    <TextView
-            android:text="@string/txt_group_workout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_group_workout"
-            app:layout_constraintStart_toEndOf="@+id/txt_help" android:layout_marginStart="24dp"
-            app:layout_constraintEnd_toStartOf="@+id/txt_ask_ride" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_what_do_now" android:textAlignment="center"
-            app:drawableTopCompat="@drawable/ic_running"/>
-    <TextView
-            android:text="@string/txt_ask_ride"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_ask_ride"
-            app:layout_constraintStart_toEndOf="@+id/txt_group_workout" android:layout_marginStart="24dp"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_what_do_now"
-            android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_shared_car"/>
-    <TextView
-            android:text="@string/txt_share_food"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_share_food"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_borrow_tool"
-            android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_chiken"/>
-    <TextView
-            android:text="@string/txt_invite_fried"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_invite_friend"
-            app:layout_constraintStart_toEndOf="@+id/txt_share_food" android:layout_marginStart="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_help"
-            android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_party"/>
-    <TextView
-            android:text="@string/txt_donate_gift"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_donate_gift"
-            app:layout_constraintStart_toEndOf="@+id/txt_invite_friend" android:layout_marginStart="24dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_group_workout"
-            android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_donate_gift"/>
-    <TextView
-            android:text="@string/txt_other"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_other"
-            app:layout_constraintStart_toEndOf="@+id/txt_donate_gift"
-            android:layout_marginStart="24dp" android:layout_marginTop="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/txt_ask_ride"
-            android:layout_marginEnd="16dp" app:layout_constraintEnd_toEndOf="parent" app:drawableTopCompat="@drawable/ic_something"/>
+
+    <LinearLayout
+            android:id="@+id/wrap_content_1"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/txt_what_do_now"
+            app:layout_constraintStart_toStartOf="parent" android:gravity="fill_horizontal">
+
+        <TextView
+                android:text="@string/txt_borrow_tool"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_borrow_tool"
+                android:layout_marginStart="18dp"
+                android:layout_marginTop="16dp"
+                android:textAlignment="center" app:drawableTopCompat="@drawable/ic_drill"/>
+        <TextView
+                android:text="@string/txt_help"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_help"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp" android:textAlignment="center" app:drawableTopCompat="@drawable/ic_help"
+        />
+        <TextView
+                android:text="@string/txt_group_workout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_group_workout"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp"
+                android:textAlignment="center"
+                app:drawableTopCompat="@drawable/ic_running"/>
+        <TextView
+                android:text="@string/txt_ask_ride"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_ask_ride"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_shared_car"/>
+    </LinearLayout>
+
+    <LinearLayout
+            android:id="@+id/wrap_content_2"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/wrap_content_1"
+            app:layout_constraintStart_toStartOf="parent" android:gravity="fill_horizontal">
+        <TextView
+                android:text="@string/txt_share_food"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_share_food"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_chicken"/>
+        <TextView
+                android:text="@string/txt_invite_fried"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_invite_friend"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_party"/>
+        <TextView
+                android:text="@string/txt_donate_gift"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_donate_gift"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_donate_gift"/>
+        <TextView
+                android:text="@string/txt_other"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_other"
+                android:layout_marginStart="24dp" android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                app:drawableTopCompat="@drawable/ic_something"/>
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

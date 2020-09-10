@@ -1,4 +1,4 @@
-package br.ufc.quixada.dsdm.meempresta;
+package br.ufc.quixada.dsdm.meempresta.fragments;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
+import br.ufc.quixada.dsdm.meempresta.R;
 
 public class ChatFragment extends Fragment {
 
@@ -27,6 +28,7 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        // setupRecycler();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_chat, container, false);
     }
