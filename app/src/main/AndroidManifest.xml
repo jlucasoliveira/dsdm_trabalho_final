@@ -9,38 +9,37 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-
-        <activity
-                android:name=".MainActivity"
-                android:screenOrientation="portrait">
+        <activity android:name=".Auth.SignupActivity" android:resizeableActivity="true"
+                  android:parentActivityName=".Auth.LoginActivity"/>
+        <activity android:name=".Auth.LoginActivity" android:resizeableActivity="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+                android:name=".MainActivity"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".SettingsActivity"
                 android:label="@string/txt_settings"
                 android:parentActivityName=".MainActivity"
                 android:screenOrientation="portrait"/>
-
         <activity
                 android:name=".RequestActivity"
-                android:screenOrientation="portrait"
                 android:parentActivityName=".MainActivity"
-                android:resizeableActivity="true"/>
-
+                android:resizeableActivity="true"
+                android:screenOrientation="portrait"/>
         <activity
                 android:name=".AboutAppActivity"
                 android:label="@string/txt_about"
                 android:parentActivityName=".SettingsActivity"
                 android:screenOrientation="portrait"/>
-
-        <activity android:name=".EditProfileActivity"
-                  android:label="@string/txt_edit_profile"
-                  android:parentActivityName=".SettingsActivity"
-                  android:screenOrientation="portrait"/>
+        <activity
+                android:name=".EditProfileActivity"
+                android:label="@string/txt_edit_profile"
+                android:parentActivityName=".SettingsActivity"
+                android:screenOrientation="portrait"/>
     </application>
 
 </manifest>

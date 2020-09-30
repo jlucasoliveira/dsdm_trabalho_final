@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+import br.ufc.quixada.dsdm.meempresta.Auth.LoginActivity;
 import br.ufc.quixada.dsdm.meempresta.fragments.ChatFragment;
 import br.ufc.quixada.dsdm.meempresta.fragments.FeedFragment;
 import br.ufc.quixada.dsdm.meempresta.fragments.RecordFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,6 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
     private final ViewHolder mViewHolder = new ViewHolder();
     protected List<Integer> mTabIcons = new ArrayList<>();
+    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if (mAuth.getCurrentUser() == null) {
+            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,9 +71,22 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        if (item.getItemId() == R.id.action_bar_setting) {
-            Intent intentSettingActivity = new Intent(this, SettingsActivity.class);
-            startActivity(intentSettingActivity);
+        Integer itemId = item.getItemId();
+        if (itemId.equals(R.id.action_bar_edit_profile))
+            startActivity(new Intent(this, EditProfileActivity.class));
+        else if (itemId.equals(R.id.action_bar_share_app)) {
+            Intent sendIntent = new Intent();
+            sendIntent.setAction(Intent.ACTION_SEND);
+            sendIntent.putExtra(Intent.EXTRA_TEXT, "Recomendo que não compartilhe o app!!!");
+            sendIntent.setType("text/plain");
+            Intent shareIntent = Intent.createChooser(sendIntent, "Compartilhar app");
+            startActivity(shareIntent);
+        }
+        else if (itemId.equals(R.id.action_bar_about_app))
+            startActivity(new Intent(this, AboutAppActivity.class));
+        else if (itemId.equals(R.id.action_bar_logoff)){
+            mAuth.signOut();
+            finish();
         }
 
         return super.onOptionsItemSelected(item);

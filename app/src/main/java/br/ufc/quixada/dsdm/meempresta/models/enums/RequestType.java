@@ -13,7 +13,4 @@ public enum RequestType {
     REQUEST_DONATE_GIFT,
     REQUEST_OTHER,
 
-    REQUEST_CANCEL,
-    REQUEST_DONE,
-
 }

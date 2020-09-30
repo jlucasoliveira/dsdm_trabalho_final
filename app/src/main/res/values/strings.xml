@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Me Empresta</string>
-    <string name="app_version">0.1.2</string>
+    <string name="app_version">0.1.3</string>
 
     <string name="txt_settings">Configurações</string>
+    <string name="txt_welcome">Bem-vindo!</string>
     <string name="txt_what_do_now">O que você precisa ou pode oferecer hoje?</string>
     <string name="txt_borrow_tool">Pedir objeto\nemprestado</string>
     <string name="txt_help">Pedir ajuda\nà alguém</string>
@@ -15,11 +16,17 @@
     <string name="txt_about">Sobre</string>
     <string name="txt_edit_profile">Editar perfil</string>
     <string name="txt_logoff">Sair</string>
-    <string name="txt_username">Nome de usuário</string>
+    <string name="txt_name">Nome</string>
     <string name="txt_password">Senha</string>
+    <string name="txt_confirm_password">Confirmar Senha</string>
     <string name="txt_save">Salvar</string>
+    <string name="txt_signup">Cadastre-se</string>
+    <string name="txt_login">Entrar</string>
     <string name="txt_cancel">Cancelar</string>
     <string name="txt_profile_pic">Foto do Perfil</string>
+    <string name="txt_min_radius">2Km</string>
+    <string name="txt_max_radius">5Km</string>
+    <string name="txt_email">Email</string>
 
     <!--_ pedir objeto emprestado_-->
     <string name="txt_object">Objeto</string>
@@ -30,24 +37,65 @@
     <string name="txt_object_fetch_radius">Até onde você pode ir buscar?</string>
     <string name="btn_object_asking">Pedir emprestado</string>
 
-    <!--_-->
+    <!--_ Little help _-->
     <string name="txt_i_need">Eu preciso</string>
     <string name="txt_hint_changing_tire">Ex: Ajuda para trocar o pneu.</string>
     <string name="txt_hint_description_help">Convença seus vizinhos: conte para eles porque precisa dessa mãozinha e
         como podem te ajudar
     </string>
-    <string name="txt_request_radius">Distância para o envia do pedido</string>
+    <string name="txt_help_request_radius">Distância para o envia do pedido</string>
     <string name="btn_asking_help">Pedir um mãozinha</string>
 
-    <!--_-->
+    <!--_ Workout _-->
     <string name="txt_activity">Atividade</string>
-    <string name="txt_hint_whant_create_running_group">Ex: Quero criar um gr</string>
+    <string name="txt_hint_want_create_running_group">Ex: Quero criar um grupo de corrida</string>
+    <string name="txt_what_you_wanna_do">O que você quer fazer?</string>
+    <string name="txt_hint_workout_description">Convide seus vizinhos conte para eles o que você quer fazer e porque é
+        importante fazer junto.
+    </string>
+    <string name="txt_how_far_can_you_go">Até onde você pode ir?</string>
+
+    <!-- _Ask ride_ -->
+    <string name="txt_title_ask_ride">Para onde você vai?</string>
+    <string name="txt_ask_ride_destiny">Destino</string>
+    <string name="txt_hint_ask_ride">Ex: Centro</string>
+    <string name="txt_hint_ask_ride_description">Ofereça carona para seus vizinhos: conte a eles sobre você, a hora e
+        frequência deste trajeto.
+    </string>
+    <string name="txt_how_far_can_you_go_find">Até onde você pode ir encontrar?</string>
+
+    <!--_Share food _-->
+    <string name="txt_title_share_food">O que você quer dividir?</string>
+    <string name="txt_food">Comida</string>
+    <string name="txt_hint_share_food">Ex: Lasanha</string>
+    <string name="txt_hint_share_food_description">Compartilhe com os vizinhos: conte para eles a guloseima que você
+        quer dividir e porque eles não podem perder
+    </string>
+    <string name="txt_what_distance">Quer oferecer para seus vizinhos até qual distância</string>
+
+    <!-- _Invide friends_ -->
+    <string name="txt_invite_for">Convidar para</string>
+    <string name="txt_hint_invite_for">Ex: Picnic no parque</string>
+    <string name="txt_hint_invite_friends_description">Convença seus vizinhos: conte para eles porque quer fazer isso e porque é divertido fazer juntos.</string>
+
+    <!-- _donate gift_ -->
+    <string name="txt_what_do_you_want_to_donate">O que você quer doar?</string>
+    <string name="txt_hint_baby_car">Ex: Carrinho de bebê.</string>
+    <string name="txt_hint_donate_gift_description">Convença seus vizinhos: conte para eles porque seu objeto está em boas condições e porque você quer se desfazer dele.</string>
+
+    <!-- _other things_ -->
+    <string name="txt_relevant_information">Informações relevantes</string>
+    <string name="txt_title">Título</string>
+    <string name="txt_hint_relevant_information">Ex: Alguém viu meu gato?</string>
+    <string name="txt_hint_other_description">Engaje seus vizinhos: conte a eles o porque essa informação é importante e relevante para todos, ou como isso pode te ajudar.</string>
+    <string name="txt_distance_to_send_the_post">Distância para envio da postagem</string>
+    <string name="txt_pub">Postar</string>
 
     <string name="txt_title_what_you_need">O que você precisa?</string>
     <string name="txt_description">Descrição</string>
     <string name="txt_want_add_image">Quer adicionar uma imagem?</string>
 
-    <string name="txt_share_app">Compartilhar app</string>
+    <string name="txt_share_app">Compartilhar</string>
     <string name="txt_request">Requisitar</string>
 
 </resources>

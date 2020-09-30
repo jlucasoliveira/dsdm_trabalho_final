@@ -11,5 +11,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" android:id="@+id/record_list"
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            tools:listitem="@layout/record_item"/>
+            tools:listitem="@layout/record_item">
+    </androidx.recyclerview.widget.RecyclerView>
 </androidx.constraintlayout.widget.ConstraintLayout>

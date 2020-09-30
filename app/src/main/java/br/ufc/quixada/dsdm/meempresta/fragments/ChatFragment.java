@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.ListAdapter;
 import androidx.recyclerview.widget.RecyclerView;
 import br.ufc.quixada.dsdm.meempresta.R;
+import br.ufc.quixada.dsdm.meempresta.adapters.ChatListAdapter;
 
 public class ChatFragment extends Fragment {
 
@@ -28,16 +29,14 @@ public class ChatFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // setupRecycler();
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_chat, container, false);
-    }
+        View view = inflater.inflate(R.layout.fragment_chat, container, false);
+        mRecyclerView = view.findViewById(R.id.chats_list);
 
-    private void setupRecycler() {
-        // Criando um gerenciador de lista
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext());
-        mRecyclerView.setLayoutManager(layoutManager);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        mRecyclerView.setAdapter(new ChatListAdapter());
 
+        return view;
     }
 
 }

@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "790518047274",
+    "firebase_url": "https://meempresta-5cd0f.firebaseio.com",
+    "project_id": "meempresta-5cd0f",
+    "storage_bucket": "meempresta-5cd0f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:790518047274:android:8e8f1852099429a34c5953",
+        "android_client_info": {
+          "package_name": "br.ufc.quixada.dsdm.meempresta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "790518047274-ut5sb221s2bvlog015hrfogm8abvm5ih.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBslRFSjxDtoRA9SS7KjwWyqnM5LE2ZvZg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "790518047274-ut5sb221s2bvlog015hrfogm8abvm5ih.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

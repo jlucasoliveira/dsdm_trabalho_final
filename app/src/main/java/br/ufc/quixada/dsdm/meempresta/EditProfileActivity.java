@@ -14,10 +14,10 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_edit_profile);
 
-        mViewHolder.editUsername = findViewById(R.id.edit_username);
+        mViewHolder.editname = findViewById(R.id.edit_username);
         mViewHolder.editPassword = findViewById(R.id.edit_password);
 
-        mViewHolder.editUsername.setText("");
+        mViewHolder.editname.setText("");
     }
 
     public void onClick( View v ) {
@@ -25,7 +25,7 @@ public class EditProfileActivity extends AppCompatActivity implements View.OnCli
     }
 
     private static class ViewHolder {
-        EditText editUsername;
+        EditText editname;
         EditText editPassword;
     }
 }

@@ -5,94 +5,88 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".fragments.FeedFragment">
-<androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/feed_layout">
-
-    <com.google.android.gms.maps.MapView
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="220dp" android:id="@+id/map_find_neighbors"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
-    <TextView
-            android:text="@string/txt_what_do_now"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_what_do_now"
-            app:layout_constraintTop_toBottomOf="@+id/map_find_neighbors" app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginStart="16dp" android:layout_marginTop="8dp" android:textSize="18sp"
-            android:textStyle="bold"/>
+            android:layout_height="match_parent"
+            android:id="@+id/feed_layout">
 
-    <LinearLayout
-            android:id="@+id/wrap_content_1"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/txt_what_do_now"
-            app:layout_constraintStart_toStartOf="parent" android:gravity="fill_horizontal">
+        <com.google.android.gms.maps.MapView
+                android:layout_width="match_parent"
+                android:layout_height="220dp" android:id="@+id/map_find_neighbors"
+                app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+        <TextView
+                android:text="@string/txt_what_do_now"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_what_do_now"
+                app:layout_constraintTop_toBottomOf="@+id/map_find_neighbors"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="16dp" android:layout_marginTop="8dp" android:textSize="14sp"
+                android:textStyle="bold"/>
 
-        <TextView
-                android:text="@string/txt_borrow_tool"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_borrow_tool"
-                android:layout_marginStart="18dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center" app:drawableTopCompat="@drawable/ic_drill"/>
-        <TextView
-                android:text="@string/txt_help"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_help"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp" android:textAlignment="center" app:drawableTopCompat="@drawable/ic_help"
-        />
-        <TextView
-                android:text="@string/txt_group_workout"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_group_workout"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp"
-                android:textAlignment="center"
-                app:drawableTopCompat="@drawable/ic_running"/>
-        <TextView
-                android:text="@string/txt_ask_ride"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_ask_ride"
-                android:layout_marginStart="24dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_shared_car"/>
-    </LinearLayout>
+        <TableLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" app:layout_constraintTop_toBottomOf="@id/txt_what_do_now"
+                app:layout_constraintStart_toStartOf="parent"
+                android:stretchColumns="*" android:paddingStart="8dp" android:paddingEnd="8dp"
+                android:layout_marginTop="8dp" android:paddingTop="8dp">
 
-    <LinearLayout
-            android:id="@+id/wrap_content_2"
-            android:orientation="horizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/wrap_content_1"
-            app:layout_constraintStart_toStartOf="parent" android:gravity="fill_horizontal">
-        <TextView
-                android:text="@string/txt_share_food"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_share_food"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_chicken"/>
-        <TextView
-                android:text="@string/txt_invite_fried"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_invite_friend"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_party"/>
-        <TextView
-                android:text="@string/txt_donate_gift"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_donate_gift"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="16dp" app:drawableTopCompat="@drawable/ic_donate_gift"/>
-        <TextView
-                android:text="@string/txt_other"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" android:id="@+id/txt_other"
-                android:layout_marginStart="24dp" android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                app:drawableTopCompat="@drawable/ic_something"/>
-    </LinearLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TableRow android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:orientation="horizontal"
+                      android:layout_weight="1" android:layout_marginBottom="8dp">
+                <TextView
+                        android:text="@string/txt_borrow_tool"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/txt_borrow_tool"
+                        app:drawableTopCompat="@drawable/ic_drill" android:textAlignment="center"
+                        android:onClick="onClick"/>
+                <TextView
+                        android:text="@string/txt_help"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/txt_help"
+                        app:drawableTopCompat="@drawable/ic_help"
+                        android:textAlignment="center"/>
+                <TextView
+                        android:text="@string/txt_group_workout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/txt_group_workout"
+                        android:textAlignment="center"
+                        app:drawableTopCompat="@drawable/ic_running"/>
+                <TextView
+                        android:text="@string/txt_ask_ride"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content" android:id="@+id/txt_ask_ride"
+                        app:drawableTopCompat="@drawable/ic_shared_car"
+                        android:textAlignment="center"/>
+            </TableRow>
+
+            <TableRow android:layout_width="match_parent" android:layout_height="wrap_content"
+                      android:orientation="horizontal" android:layout_weight="1">
+                <TextView
+                        android:text="@string/txt_share_food"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/txt_share_food"
+                        app:drawableTopCompat="@drawable/ic_chicken"
+                        android:textAlignment="center"/>
+                <TextView
+                        android:text="@string/txt_invite_fried"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/txt_invite_friend"
+                        app:drawableTopCompat="@drawable/ic_party"
+                        android:textAlignment="center"/>
+                <TextView
+                        android:text="@string/txt_donate_gift"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/txt_donate_gift"
+                        app:drawableTopCompat="@drawable/ic_donate_gift"
+                        android:textAlignment="center"/>
+                <TextView
+                        android:text="@string/txt_other"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content" android:id="@+id/txt_other"
+                        app:drawableTopCompat="@drawable/ic_something"
+                        android:textAlignment="center"/>
+            </TableRow>
+        </TableLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

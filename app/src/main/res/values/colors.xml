@@ -5,6 +5,6 @@
     <color name="colorAccent">#0080F0</color>
     <color name="colorTextPrimary">#333</color>
     <color name="colorTest2">#EEE</color>
-    <color name="colorTest3">#1EECFA</color>
+    <color name="colorAccentDark">#185A93</color>
     <color name="colorTest4">#DFBEDB</color>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
@@ -14,14 +14,15 @@
             android:id="@+id/tabs_main_view"
             app:tabMode="fixed"
             app:tabGravity="fill"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toTopOf="parent"/>
+            android:layout_alignParentTop="true"
+            android:layout_alignParentStart="true"/>
 
     <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/view_wrapper_main"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tabs_main_view"/>
+            android:layout_below="@id/tabs_main_view" android:layout_alignParentStart="true"
+            android:layout_alignParentBottom="true"
+    />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
