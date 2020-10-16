@@ -4,10 +4,10 @@
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".fragments.FeedFragment">
+        tools:context=".Fragments.FeedFragment">
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/feed_layout">
 
         <com.google.android.gms.maps.MapView
@@ -39,27 +39,26 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/txt_borrow_tool"
                         app:drawableTopCompat="@drawable/ic_drill" android:textAlignment="center"
-                        android:onClick="onClick"/>
+                        android:onClick="onClick" android:layout_weight="1"/>
                 <TextView
                         android:text="@string/txt_help"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/txt_help"
                         app:drawableTopCompat="@drawable/ic_help"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" android:layout_weight="1"/>
                 <TextView
                         android:text="@string/txt_group_workout"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/txt_group_workout"
                         android:textAlignment="center"
-                        app:drawableTopCompat="@drawable/ic_running"/>
+                        app:drawableTopCompat="@drawable/ic_running" android:layout_weight="1"/>
                 <TextView
                         android:text="@string/txt_ask_ride"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" android:id="@+id/txt_ask_ride"
                         app:drawableTopCompat="@drawable/ic_shared_car"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" android:layout_weight="1"/>
             </TableRow>
-
             <TableRow android:layout_width="match_parent" android:layout_height="wrap_content"
                       android:orientation="horizontal" android:layout_weight="1">
                 <TextView
@@ -67,25 +66,25 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/txt_share_food"
                         app:drawableTopCompat="@drawable/ic_chicken"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" android:layout_weight="1"/>
                 <TextView
                         android:text="@string/txt_invite_fried"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/txt_invite_friend"
                         app:drawableTopCompat="@drawable/ic_party"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" android:layout_weight="1"/>
                 <TextView
                         android:text="@string/txt_donate_gift"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/txt_donate_gift"
                         app:drawableTopCompat="@drawable/ic_donate_gift"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" android:layout_weight="1"/>
                 <TextView
                         android:text="@string/txt_other"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content" android:id="@+id/txt_other"
                         app:drawableTopCompat="@drawable/ic_something"
-                        android:textAlignment="center"/>
+                        android:textAlignment="center" android:layout_weight="1"/>
             </TableRow>
         </TableLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

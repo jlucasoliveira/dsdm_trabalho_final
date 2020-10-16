@@ -7,13 +7,11 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentActivity;
-import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
+import br.ufc.quixada.dsdm.meempresta.Adapters.TabAdapter;
 import br.ufc.quixada.dsdm.meempresta.Auth.LoginActivity;
-import br.ufc.quixada.dsdm.meempresta.fragments.ChatFragment;
-import br.ufc.quixada.dsdm.meempresta.fragments.FeedFragment;
-import br.ufc.quixada.dsdm.meempresta.fragments.RecordFragment;
+import br.ufc.quixada.dsdm.meempresta.Fragments.FeedFragment;
+import br.ufc.quixada.dsdm.meempresta.Fragments.RecordFragment;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +21,12 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private final ViewHolder mViewHolder = new ViewHolder();
-    protected List<Integer> mTabIcons = new ArrayList<>();
-    private FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    ViewPager2 mViewPager;
+    TabLayout mTabLayout;
+    TabAdapter tabAdapter;
+
+    private final List<Integer> mTabIcons = new ArrayList<>(2);
+    private final FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     @Override
     protected void onStart() {
@@ -42,25 +43,29 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mViewHolder.viewWrapperMain = findViewById(R.id.view_wrapper_main);
-        mViewHolder.tabMainView     = findViewById(R.id.tabs_main_view);
+        mViewPager = findViewById(R.id.view_wrapper_main);
+        mTabLayout = findViewById(R.id.tabs_main_view);
 
         configTabs();
     }
 
     private void configTabs() {
-        TabAdapter tabAdapter = new TabAdapter(this);
+        tabAdapter = new TabAdapter(this);
 
-        tabAdapter.add(new FeedFragment(), R.drawable.ic_outline_home_24);
-        tabAdapter.add(new ChatFragment(), R.drawable.ic_request);
-        tabAdapter.add(new RecordFragment(), R.drawable.ic_record);
+        addTab(new FeedFragment(), R.drawable.ic_outline_home_24);
+        addTab(new RecordFragment(), R.drawable.ic_record);
 
-        mViewHolder.viewWrapperMain.setAdapter(tabAdapter);
+        mViewPager.setAdapter(tabAdapter);
 
         new TabLayoutMediator(
-            mViewHolder.tabMainView, this.mViewHolder.viewWrapperMain,
+            mTabLayout, mViewPager,
             (tab, position) -> tab.setIcon(mTabIcons.get(position))
         ).attach();
+    }
+
+    private void addTab(Fragment tab, int icon) {
+        tabAdapter.add(tab);
+        mTabIcons.add(icon);
     }
 
     @Override
@@ -86,40 +91,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(new Intent(this, AboutAppActivity.class));
         else if (itemId.equals(R.id.action_bar_logoff)){
             mAuth.signOut();
+            startActivity(new Intent(this, LoginActivity.class));
             finish();
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private static class ViewHolder {
-        ViewPager2 viewWrapperMain;
-        TabLayout tabMainView;
-    }
-
-    private class TabAdapter extends FragmentStateAdapter {
-
-        private List<Fragment> tabs = new ArrayList<>();
-
-        public TabAdapter(@NonNull FragmentActivity fragmentActivity) {
-            super(fragmentActivity);
-        }
-
-        public void add(Fragment fragment, Integer iconResourceId){
-            this.tabs.add(fragment);
-            mTabIcons.add(iconResourceId);
-        }
-        
-        @NonNull
-        @Override
-        public Fragment createFragment(int position) {
-            return tabs.get(position);
-        }
-
-        @Override
-        public int getItemCount() {
-            return tabs.size();
-        }
-
     }
 }

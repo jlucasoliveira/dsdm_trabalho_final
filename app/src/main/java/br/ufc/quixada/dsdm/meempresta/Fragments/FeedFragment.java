@@ -1,4 +1,4 @@
-package br.ufc.quixada.dsdm.meempresta.fragments;
+package br.ufc.quixada.dsdm.meempresta.Fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,7 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import br.ufc.quixada.dsdm.meempresta.R;
 import br.ufc.quixada.dsdm.meempresta.RequestActivity;
-import br.ufc.quixada.dsdm.meempresta.models.enums.RequestType;
+import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestType;
 
 public class FeedFragment extends Fragment implements View.OnClickListener{
 
@@ -57,28 +57,28 @@ public class FeedFragment extends Fragment implements View.OnClickListener{
 
         switch (v.getId()){
             case R.id.txt_borrow_tool:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_BORROW_TOOL.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_BORROW_TOOL.getCode());
                 break;
             case R.id.txt_help:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_HELP.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_HELP.getCode());
                 break;
             case R.id.txt_group_workout:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_WORKOUT.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_WORKOUT.getCode());
                 break;
             case R.id.txt_ask_ride:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_ASK_RIDE.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_ASK_RIDE.getCode());
                 break;
             case R.id.txt_share_food:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_SHARE_FOOD.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_SHARE_FOOD.getCode());
                 break;
             case R.id.txt_invite_friend:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_INVITE_FRIENDS.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_INVITE_FRIENDS.getCode());
                 break;
             case R.id.txt_donate_gift:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_DONATE_GIFT.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_DONATE_GIFT.getCode());
                 break;
             case R.id.txt_other:
-                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_OTHER.ordinal());
+                intent.putExtra(RequestType.REQUEST_TYPE.name(), RequestType.REQUEST_OTHER.getCode());
                 break;
         }
         startActivity(intent);

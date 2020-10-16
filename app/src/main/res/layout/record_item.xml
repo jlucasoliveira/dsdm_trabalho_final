@@ -1,26 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<RelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" android:padding="15dp" android:paddingStart="20dp"
-        android:paddingEnd="15dp">
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" android:layout_height="wrap_content"
+        android:paddingVertical="15dp" android:paddingHorizontal="5dp">
 
     <TextView
-            android:id="@+id/object_name"
+            android:id="@+id/txt_title_record" tools:text="Emprestimo"
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            app:layout_constraintTop_toTopOf="parent" app:layout_constraintStart_toStartOf="parent"
-            android:textStyle="bold" android:textSize="18sp" android:ellipsize="marquee"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/object_owner"
-            app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/object_name"
-            android:textSize="16sp" android:ellipsize="middle"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/loan_date"
-            app:layout_constraintTop_toBottomOf="@id/object_name"
-            android:gravity="end"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+            android:layout_alignEnd="@id/loan_date_record" android:textStyle="bold"
+            android:textSize="18sp" android:ellipsize="end"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/loan_date_record" android:layout_alignParentEnd="true"
+            tools:text="21/01/1992"/>
+
+    <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/txt_description_record" android:layout_below="@id/txt_title_record"
+            android:layout_alignParentStart="true" tools:text="TESTAsSo"
+            android:textSize="16sp" android:ellipsize="end" android:layout_alignEnd="@id/img_done_request"/>
+
+    <ImageView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/img_done_request" android:src="@drawable/ic_baseline_done_24"
+            android:layout_below="@id/loan_date_record" android:layout_alignParentEnd="true"
+            android:visibility="gone"/>
+
+</RelativeLayout>

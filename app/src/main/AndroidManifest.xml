@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
           package="br.ufc.quixada.dsdm.meempresta">
 
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.CAMERA"/>
+
     <application
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
@@ -9,37 +12,34 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
-        <activity android:name=".Auth.SignupActivity" android:resizeableActivity="true"
-                  android:parentActivityName=".Auth.LoginActivity"/>
-        <activity android:name=".Auth.LoginActivity" android:resizeableActivity="true">
+
+        <activity
+                android:name=".Auth.SignupActivity"
+                android:label="@string/txt_signup"
+                android:parentActivityName=".Auth.LoginActivity"/>
+
+        <activity android:name=".Auth.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity
-                android:name=".MainActivity"
-                android:screenOrientation="portrait"/>
-        <activity
-                android:name=".SettingsActivity"
-                android:label="@string/txt_settings"
-                android:parentActivityName=".MainActivity"
-                android:screenOrientation="portrait"/>
+
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".DealActivity"
+                  android:parentActivityName=".MainActivity"
+                  android:label="@string/deal"/>
         <activity
                 android:name=".RequestActivity"
-                android:parentActivityName=".MainActivity"
-                android:resizeableActivity="true"
-                android:screenOrientation="portrait"/>
+                android:parentActivityName=".MainActivity"/>
         <activity
                 android:name=".AboutAppActivity"
-                android:label="@string/txt_about"
-                android:parentActivityName=".SettingsActivity"
-                android:screenOrientation="portrait"/>
+                android:parentActivityName=".MainActivity"
+                android:label="@string/txt_about"/>
         <activity
                 android:name=".EditProfileActivity"
-                android:label="@string/txt_edit_profile"
-                android:parentActivityName=".SettingsActivity"
-                android:screenOrientation="portrait"/>
+                android:parentActivityName=".MainActivity"
+                android:label="@string/txt_edit_profile"/>
     </application>
 
 </manifest>

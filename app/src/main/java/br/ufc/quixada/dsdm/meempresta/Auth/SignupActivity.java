@@ -8,13 +8,21 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import br.ufc.quixada.dsdm.meempresta.MainActivity;
+import br.ufc.quixada.dsdm.meempresta.Models.User;
 import br.ufc.quixada.dsdm.meempresta.R;
+import br.ufc.quixada.dsdm.meempresta.utils.DBCollections;
+import br.ufc.quixada.dsdm.meempresta.utils.ToastMessage;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.Map;
 
 public class SignupActivity extends AppCompatActivity {
 
-    Button mBtnSignUp;
     FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
+
+    Button mBtnSignUp;
     EditText mEditName, mEditEmail, mEditPass, mEditConfirmPass;
 
     @Override
@@ -22,15 +30,14 @@ public class SignupActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
 
-        getSupportActionBar().setTitle(R.string.txt_signup);
-
+        mBtnSignUp = findViewById(R.id.btn_sign_up);
         mEditName = findViewById(R.id.edit_sign_up_name);
         mEditEmail = findViewById(R.id.edit_sign_up_email);
         mEditPass = findViewById(R.id.edit_sign_up_password);
         mEditConfirmPass = findViewById(R.id.edit_sign_up_confirm_password);
-        mBtnSignUp = findViewById(R.id.btn_sign_up);
 
         mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
 
         mBtnSignUp.setOnClickListener(this::onClickSigUp);
     }
@@ -56,8 +63,8 @@ public class SignupActivity extends AppCompatActivity {
             return;
         }
 
-        if (pass.length() < 8) {
-            mEditPass.setError("A senha dever ter no mínimo 8 caracteres.");
+        if (pass.length() < 6) {
+            mEditPass.setError("A senha dever ter no mínimo 6 caracteres.");
             return;
         }
 
@@ -67,12 +74,13 @@ public class SignupActivity extends AppCompatActivity {
         }
 
         mAuth.createUserWithEmailAndPassword(email, pass).addOnCompleteListener(task -> {
-            if (task.isSuccessful()){
+            if (task.isSuccessful()) {
+                mFirestore.collection(DBCollections.USER_COLLECTION).add(new User(null, name, email, 0.0));
                 startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                finish();
             }
-            else {
-                Toast.makeText(getApplicationContext(), task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-            }
+            else
+                ToastMessage.showMessage(this, task.getException().getMessage());
         });
 
     }

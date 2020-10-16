@@ -1,36 +1,50 @@
 <resources>
     <string name="app_name">Me Empresta</string>
-    <string name="app_version">0.1.3</string>
+    <string name="app_version">0.1.4</string>
 
     <string name="txt_settings">Configurações</string>
     <string name="txt_welcome">Bem-vindo!</string>
     <string name="txt_what_do_now">O que você precisa ou pode oferecer hoje?</string>
-    <string name="txt_borrow_tool">Pedir objeto\nemprestado</string>
-    <string name="txt_help">Pedir ajuda\nà alguém</string>
-    <string name="txt_group_workout">Companhia\npara exercício</string>
-    <string name="txt_ask_ride">Oferecer\ncarona</string>
-    <string name="txt_share_food">Compartilhar\ncomida</string>
-    <string name="txt_invite_fried">Convidar\nvizinhos</string>
+    <string name="txt_borrow_tool">Pedir objeto emprestado</string>
+    <string name="txt_help">Pedir ajuda à alguém</string>
+    <string name="txt_group_workout">Companhia para exercício</string>
+    <string name="txt_ask_ride">Oferecer carona</string>
+    <string name="txt_share_food">Compartilhar comida</string>
+    <string name="txt_invite_fried">Convidar vizinhos</string>
     <string name="txt_donate_gift">Doar objeto</string>
     <string name="txt_other">Outro</string>
     <string name="txt_about">Sobre</string>
     <string name="txt_edit_profile">Editar perfil</string>
     <string name="txt_logoff">Sair</string>
+    <string name="yes">Sim</string>
+    <string name="no">Não</string>
+
+    <!-- Deal menu -->
+    <string name="done">Concluir</string>
+    <string name="cancel">Cancelar</string>
+    <string name="remove">Excluir</string>
+    <string name="deal">Combinação</string>
+    <string name="do_wanna_remove">Deseja remover o pedido?</string>
+    <string name="do_wanna_cancel">Deseja cancelar o pedido?</string>
+    <string name="do_wanna_done">Marcar como concluído?</string>
+
+    <!-- Cadastro -->
     <string name="txt_name">Nome</string>
     <string name="txt_password">Senha</string>
     <string name="txt_confirm_password">Confirmar Senha</string>
     <string name="txt_save">Salvar</string>
     <string name="txt_signup">Cadastre-se</string>
+    <string name="txt_email">Email</string>
+
     <string name="txt_login">Entrar</string>
     <string name="txt_cancel">Cancelar</string>
     <string name="txt_profile_pic">Foto do Perfil</string>
     <string name="txt_min_radius">2Km</string>
     <string name="txt_max_radius">5Km</string>
-    <string name="txt_email">Email</string>
 
     <!--_ pedir objeto emprestado_-->
     <string name="txt_object">Objeto</string>
-    <string name="txt_object_hint_drilling_machine">Ex: Furadora</string>
+    <string name="txt_object_hint_drilling_machine">Ex: Furadeira</string>
     <string name="txt_object_hint_description">Convença seus vizinhos: conte para eles porque precisa desse
         objeto e porque é importante para você.
     </string>
@@ -76,18 +90,24 @@
     <!-- _Invide friends_ -->
     <string name="txt_invite_for">Convidar para</string>
     <string name="txt_hint_invite_for">Ex: Picnic no parque</string>
-    <string name="txt_hint_invite_friends_description">Convença seus vizinhos: conte para eles porque quer fazer isso e porque é divertido fazer juntos.</string>
+    <string name="txt_hint_invite_friends_description">Convença seus vizinhos: conte para eles porque quer fazer isso e
+        porque é divertido fazer juntos.
+    </string>
 
     <!-- _donate gift_ -->
     <string name="txt_what_do_you_want_to_donate">O que você quer doar?</string>
     <string name="txt_hint_baby_car">Ex: Carrinho de bebê.</string>
-    <string name="txt_hint_donate_gift_description">Convença seus vizinhos: conte para eles porque seu objeto está em boas condições e porque você quer se desfazer dele.</string>
+    <string name="txt_hint_donate_gift_description">Convença seus vizinhos: conte para eles porque seu objeto está em
+        boas condições e porque você quer se desfazer dele.
+    </string>
 
     <!-- _other things_ -->
     <string name="txt_relevant_information">Informações relevantes</string>
     <string name="txt_title">Título</string>
     <string name="txt_hint_relevant_information">Ex: Alguém viu meu gato?</string>
-    <string name="txt_hint_other_description">Engaje seus vizinhos: conte a eles o porque essa informação é importante e relevante para todos, ou como isso pode te ajudar.</string>
+    <string name="txt_hint_other_description">Engaje seus vizinhos: conte a eles o porque essa informação é importante e
+        relevante para todos, ou como isso pode te ajudar.
+    </string>
     <string name="txt_distance_to_send_the_post">Distância para envio da postagem</string>
     <string name="txt_pub">Postar</string>
 

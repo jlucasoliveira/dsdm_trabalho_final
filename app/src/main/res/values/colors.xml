@@ -4,7 +4,8 @@
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#0080F0</color>
     <color name="colorTextPrimary">#333</color>
-    <color name="colorTest2">#EEE</color>
+    <color name="colorBackground">#EEE</color>
+    <color name="colorBackgroundDark">#dfdfdf</color>
     <color name="colorAccentDark">#185A93</color>
     <color name="colorTest4">#DFBEDB</color>
 </resources>

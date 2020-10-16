@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent" android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".DealActivity" android:isScrollContainer="true"
+        android:focusable="true" android:focusableInTouchMode="true">
+
+    <TextView
+            android:id="@+id/txt_title_deal" tools:text="Emprestimo"
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+            android:textStyle="bold" android:layout_marginStart="5dp"
+            android:textSize="18sp" android:ellipsize="end"/>
+
+    <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/txt_description_deal" android:layout_below="@id/txt_title_deal"
+            android:layout_alignParentStart="true" tools:text="TESTAsSo"
+            android:textSize="16sp" android:layout_marginStart="5dp"/>
+
+    <TextView
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:id="@+id/loan_date_deal" android:layout_alignParentEnd="true"
+            android:layout_below="@id/txt_description_deal" tools:text="21/01/1992"
+            android:layout_marginEnd="10dp"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_chat"
+            android:layout_width="match_parent" android:layout_height="0dp"
+            android:layout_alignBottom="@id/edit_message_input" app:stackFromEnd="true"
+            android:layout_below="@id/loan_date_deal" android:paddingHorizontal="15dp"/>
+
+    <EditText
+            android:layout_width="0dp" android:layout_height="wrap_content"
+            android:layout_alignParentStart="true" android:layout_toStartOf="@id/fa_message_send"
+            android:layout_alignParentBottom="true" android:layout_margin="5dp"
+            android:layout_marginBottom="20dp" android:paddingVertical="10dp"
+            android:id="@+id/edit_message_input" android:background="@drawable/background_input_message"
+            android:textColor="@android:color/white" android:paddingStart="5dp"/>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true" android:layout_alignParentBottom="true"
+            android:id="@+id/fa_message_send" android:src="@drawable/ic_baseline_send_24"
+            android:layout_margin="5dp"/>
+
+    <ProgressBar
+            android:layout_width="wrap_content" android:layout_height="wrap_content"
+            android:layout_centerInParent="true" android:id="@+id/pb_deal"/>
+
+</RelativeLayout>

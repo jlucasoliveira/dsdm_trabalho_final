@@ -1,17 +1,11 @@
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorTest2</item>
+        <item name="colorPrimary">@color/colorBackground</item>
         <item name="colorPrimaryDark">#D2CEDC</item>
         <item name="colorAccent">@color/colorAccent</item>
         <item name="titleTextColor">@color/colorTextPrimary</item>
-        <item name="actionOverflowButtonStyle">@style/ButtonsColorStyle</item>
-        <item name="android:homeAsUpIndicator">@drawable/ic_baseline_arrow_back_24</item>
-    </style>
-
-    <style name="ButtonsColorStyle" parent="android:style/Widget.Holo.Light.ActionButton.Overflow">
-        <item name="android:hint">@color/colorTextPrimary</item>
     </style>
 
 </resources>

@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_menu">
-    <item
-            android:icon="@drawable/ic_baseline_edit_24"
-            android:id="@+id/action_bar_edit_profile"
-            android:title="@string/txt_edit_profile"/>
-    <item
-            android:icon="@drawable/ic_baseline_share_24"
-            android:id="@+id/action_bar_share_app"
-            android:title="@string/txt_share_app"/>
-    <item
-            android:id="@+id/action_bar_about_app"
-            android:icon="@drawable/ic_baseline_info_24"
-            android:title="@string/txt_about"/>
-    <item
-            android:id="@+id/action_bar_logoff"
-            android:icon="@drawable/ic_baseline_exit_to_app_24"
-            android:title="@string/txt_logoff"/>
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/main_menu">
+
+        <item
+                android:id="@+id/action_bar_edit_profile"
+                android:title="@string/txt_edit_profile"/>
+        <item
+                android:id="@+id/action_bar_share_app"
+                android:title="@string/txt_share_app"/>
+        <item
+                android:id="@+id/action_bar_about_app"
+                android:title="@string/txt_about"/>
+        <item
+                android:id="@+id/action_bar_logoff"
+                android:title="@string/txt_logoff"/>
 </menu>
