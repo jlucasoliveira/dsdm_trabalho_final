@@ -1,7 +1,6 @@
 package br.ufc.quixada.dsdm.meempresta;
 
 import android.content.Intent;
-import android.net.Uri;
 import android.provider.MediaStore;
 import android.view.View;
 import android.widget.*;
@@ -15,23 +14,19 @@ import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestType;
 import br.ufc.quixada.dsdm.meempresta.utils.Constants;
 import br.ufc.quixada.dsdm.meempresta.utils.DBCollections;
 import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.io.File;
-
 public class RequestActivity extends AppCompatActivity {
-
-    private final ViewHolder mViewHolder = new ViewHolder();
 
     OfflineUser offlineUser;
     StorageReference mStorage;
     FirebaseFirestore mFirestore;
+
+    private final ViewHolder mViewHolder = new ViewHolder();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,11 +72,11 @@ public class RequestActivity extends AppCompatActivity {
             return;
         }
 
-        mFirestore.collection(DBCollections.USER_COLLECTION).document(uid).get().addOnCompleteListener(user -> {
-            Double longitude = user.getResult().getDouble("longitude");
-            Double latitude = user.getResult().getDouble("latitude");
+        mFirestore.collection(DBCollections.USER_COLLECTION).document(uid).get().addOnCompleteListener(task1 -> {
+            Double longitude = task1.getResult().getDouble("longitude");
+            Double latitude = task1.getResult().getDouble("latitude");
             Request request = new Request(null, title, description, Timestamp.now(), requestType, RequestStatus.NEW,
-                    longitude, latitude, uid, null);
+                    new GeoPoint(longitude, latitude), uid, null);
             mFirestore.collection(DBCollections.REQUEST_COLLECTION).add(request).addOnCompleteListener(task -> {
                 if(task.isSuccessful()){
                     Toast.makeText(this,"Requisição realizada com sucesso!", Toast.LENGTH_SHORT).show();

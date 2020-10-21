@@ -1,5 +1,6 @@
 package br.ufc.quixada.dsdm.meempresta;
 
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,14 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import br.ufc.quixada.dsdm.meempresta.Adapters.ChatAdapter;
 import br.ufc.quixada.dsdm.meempresta.Models.Chat;
+import br.ufc.quixada.dsdm.meempresta.Models.Request;
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestStatus;
 import br.ufc.quixada.dsdm.meempresta.utils.Constants;
 import br.ufc.quixada.dsdm.meempresta.utils.DBCollections;
 import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.text.SimpleDateFormat;
@@ -57,29 +57,18 @@ public class DealActivity extends AppCompatActivity {
         mTxtDescription = findViewById(R.id.txt_description_deal);
 
         mFirestore = FirebaseFirestore.getInstance();
-        offlineUser = new OfflineUser(this);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
         llm.setStackFromEnd(true);
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(llm);
 
+        offlineUser = new OfflineUser(this);
+
         mFaSendMessage.setOnClickListener(this::sendMessage);
 
         changeUI();
         loadChat();
-        setHelp();
-    }
-
-    private void setHelp() {
-        Bundle bundle = getIntent().getExtras();
-        String action = getIntent().getAction();
-        if (bundle != null && action.equals(Constants.HELP_SOMEONE)){
-            String requestId = bundle.getString(Constants.REQUEST_ID);
-            mFirestore.collection(DBCollections.REQUEST_COLLECTION).document(requestId)
-                    .update("status", RequestStatus.PENDING.getCode(),
-                            "resolver", uid);
-        }
     }
 
     public void changeUI() {
@@ -109,13 +98,15 @@ public class DealActivity extends AppCompatActivity {
             assert value != null;
             messages.clear();
             messages.addAll(value.toObjects(Chat.class));
-            chatAdapter = new ChatAdapter(messages);
+            chatAdapter = new ChatAdapter(this, messages);
             mRecyclerView.setAdapter(chatAdapter);
         });
     }
 
     public void sendMessage(View view) {
-        if (getIntent().getExtras().get()) {
+        Integer rStatus = getIntent().getExtras().getInt(Constants.REQUEST_STATUS);
+        String rResolver = getIntent().getExtras().getString(Constants.REQUEST_RESOLVER);
+        if (rStatus.equals(RequestStatus.PENDING.getCode())) {
             String userId = offlineUser.getString(Constants.USER_ID);
             String message = mInputMessage.getText().toString().trim();
             String requestId = getIntent().getExtras().getString(Constants.REQUEST_ID);
@@ -126,19 +117,31 @@ public class DealActivity extends AppCompatActivity {
             }
 
             mFirestore.collection(DBCollections.CHAT_COLLECTION)
-                    .add(new Chat(null, userId, resolver, message, requestId, Timestamp.now()));
+                    .add(new Chat(null, userId, rResolver, message, requestId, Timestamp.now()));
             mInputMessage.setText("");
         }
         else
-            Toast.makeText(this, "Este pedido ainda não foi aceito", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Este pedido ainda não foi aceito!", Toast.LENGTH_SHORT).show();
     }
 
-    public void alertDialogOptions(Integer RString, RequestStatus status, boolean doRemove) {
+    private void sendHelp() {
+        Bundle bundle = getIntent().getExtras();
+        String action = getIntent().getAction();
+        if (bundle != null && action != null && action.equals(Constants.HELP_SOMEONE)){
+            String userId = offlineUser.getString(Constants.USER_ID);
+            String requestId = bundle.getString(Constants.REQUEST_ID);
+            mFirestore.collection(DBCollections.REQUEST_COLLECTION).document(requestId)
+                    .update("status", RequestStatus.PENDING.getCode(),
+                            "resolver", userId);
+        }
+    }
+
+    public void alertDialogOptions(Integer RString, RequestStatus status) {
         String requestId = getIntent().getExtras().getString(Constants.REQUEST_ID);
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
         builder.setTitle(RString)
                 .setPositiveButton(R.string.yes, (dialog, which) -> {
-                    if (!doRemove)
+                    if (status != null)
                         mFirestore.collection(DBCollections.REQUEST_COLLECTION)
                                 .document(requestId).update("status", status.getCode());
                     else
@@ -152,8 +155,19 @@ public class DealActivity extends AppCompatActivity {
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        if (getIntent().getAction() == null || !getIntent().getAction().equals(Constants.HELP_SOMEONE))
-            getMenuInflater().inflate(R.menu.menu_deal, menu);
+        String userId = new OfflineUser(this).getString(Constants.USER_ID);
+        String requestOwner = getIntent().getExtras().getString(Constants.REQUEST_OWNER);
+        Log.d("DEAL_", requestOwner + " - " + userId);
+
+        getMenuInflater().inflate(R.menu.menu_deal, menu);
+
+        if (!requestOwner.equals(userId) && getIntent().getAction() != null && getIntent().getAction().equals(Constants.HELP_SOMEONE)) {
+            menu.findItem(R.id.done_request).setVisible(false);
+            menu.findItem(R.id.cancel_request).setVisible(false);
+            menu.findItem(R.id.delete_request).setVisible(false);
+            menu.findItem(R.id.accept_request).setVisible(true);
+        }
+
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -161,11 +175,13 @@ public class DealActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Integer itemId = item.getItemId();
         if (itemId.equals(R.id.cancel_request))
-            alertDialogOptions(R.string.do_wanna_cancel, RequestStatus.CANCELED, false);
+            alertDialogOptions(R.string.do_wanna_cancel, RequestStatus.CANCELED);
         else if (itemId.equals(R.id.done_request))
-            alertDialogOptions(R.string.do_wanna_done, RequestStatus.DONE, false);
+            alertDialogOptions(R.string.do_wanna_done, RequestStatus.DONE);
         else if (itemId.equals(R.id.delete_request))
-            alertDialogOptions(R.string.do_wanna_remove, null, true);
+            alertDialogOptions(R.string.do_wanna_remove, null);
+        else if (itemId.equals(R.id.accept_request))
+            sendHelp();
         return super.onOptionsItemSelected(item);
     }
 

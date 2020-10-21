@@ -21,6 +21,7 @@ import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class RecordFragment extends Fragment {
 
@@ -62,11 +63,13 @@ public class RecordFragment extends Fragment {
 
     public void loadRecords() {
         String uid = offlineUser.getString(Constants.USER_ID);
-        mFirestore.collection(DBCollections.REQUEST_COLLECTION).whereEqualTo("owner", uid)
+        mFirestore.collection(DBCollections.REQUEST_COLLECTION)
         .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 mRecords.clear();
-                mRecords.addAll(task.getResult().toObjects(Request.class));
+                for (Request r :task.getResult().toObjects(Request.class))
+                    if (r.getOwner().equals(uid) || r.getResolver().equals(uid))
+                        mRecords.add(r);
                 mRecordAdapter = new RecordListAdapter(getContext(), mRecords);
                 mRecyclerView.setAdapter(mRecordAdapter);
                 mPbRecord.setVisibility(View.INVISIBLE);

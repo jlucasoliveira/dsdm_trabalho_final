@@ -18,6 +18,7 @@ import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.GeoPoint;
 
 import java.io.IOException;
 import java.util.List;
@@ -48,14 +49,14 @@ public class SignupActivity extends AppCompatActivity {
         mFirestore = FirebaseFirestore.getInstance();
         offlineUser = new OfflineUser(this);
 
-        mBtnSignUp.setOnClickListener(this::onClickSigUp);
+        mBtnSignUp.setOnClickListener(this::onClickSignUp);
     }
 
-    public void onClickSigUp(View view) {
+    public void onClickSignUp(View view) {
         String name = mEditName.getText().toString().trim();
         String email = mEditEmail.getText().toString().trim();
-        String pass = mEditPass.getText().toString().trim();
-        String confirmPass = mEditConfirmPass.getText().toString().trim();
+        String pass = mEditPass.getText().toString();
+        String confirmPass = mEditConfirmPass.getText().toString();
         String locationName = mEditAddress.getText().toString();
 
         if (name.isEmpty()) {
@@ -96,9 +97,9 @@ public class SignupActivity extends AppCompatActivity {
                         Toast.makeText(this, "Algo deu errado!", Toast.LENGTH_SHORT).show();
                         return;
                     }
-                    LatLng latLng = new LatLng(address.get(0).getLatitude(), address.get(0).getLongitude());
+                    GeoPoint local  = new GeoPoint(address.get(0).getLatitude(), address.get(0).getLongitude());
                     mFirestore.collection(DBCollections.USER_COLLECTION)
-                            .add(new User(null, name, email, null, latLng))
+                            .add(new User(null, name, email, null, local))
                             .addOnCompleteListener(user -> {
                                 offlineUser.storeString(Constants.USER_ID, user.getResult().getId());
                             });

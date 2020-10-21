@@ -25,6 +25,7 @@
     <string name="cancel">Cancelar</string>
     <string name="remove">Excluir</string>
     <string name="deal">Combinação</string>
+    <string name="accept">Aceitar</string>
     <string name="do_wanna_remove">Deseja remover o pedido?</string>
     <string name="do_wanna_cancel">Deseja cancelar o pedido?</string>
     <string name="do_wanna_done">Marcar como concluído?</string>

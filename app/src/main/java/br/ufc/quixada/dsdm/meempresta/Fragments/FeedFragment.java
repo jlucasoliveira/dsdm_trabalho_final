@@ -3,7 +3,6 @@ package br.ufc.quixada.dsdm.meempresta.Fragments;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
-import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -151,18 +150,19 @@ public class FeedFragment extends Fragment implements View.OnClickListener, OnMa
             if (task.isSuccessful()) {
                 User user = task.getResult().toObject(User.class);
                 assert user != null;
-                LatLng myLocation = new LatLng(user.getLatitude(), user.getLongitude());
+                LatLng myLocation = new LatLng(user.getLocation().getLatitude(), user.getLocation().getLongitude());
                 gMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
 
                 mFirestore.collection(DBCollections.REQUEST_COLLECTION)
+                .whereNotEqualTo("owner", userId)
                 .whereEqualTo("status", RequestStatus.NEW.getCode())
                 .get().addOnCompleteListener(task1 -> {
                     if (task1.isSuccessful()) {
                         task1.getResult().toObjects(Request.class).forEach(r -> {
                             gMap.addMarker(new MarkerOptions()
-                                    .icon(DrawableToBitmap.getIcon(getContext(), r.getType()))
-                                    .position(new LatLng(r.getLatitude(), r.getLongitude()))
                                     .title(r.getTitle())
+                                    .icon(DrawableToBitmap.getIcon(getContext(), r.getType()))
+                                    .position(new LatLng(r.getLocation().getLatitude(), r.getLocation().getLongitude()))
                             );
                         });
                     }
@@ -175,7 +175,6 @@ public class FeedFragment extends Fragment implements View.OnClickListener, OnMa
     public void onMapClick(LatLng latLng) {
         startActivity(new Intent(getContext(), FindRequestsActivity.class));
     }
-
 
     private static class ViewHolder {
         TextView textBorrowTool, textHelp, txtGroupWorkout, txtAskRide,

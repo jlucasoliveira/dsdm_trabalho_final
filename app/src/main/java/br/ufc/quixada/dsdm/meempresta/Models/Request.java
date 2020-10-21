@@ -1,11 +1,10 @@
 package br.ufc.quixada.dsdm.meempresta.Models;
 
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestStatus;
-import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.Timestamp;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.DocumentId;
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestType;
+import com.google.firebase.firestore.GeoPoint;
 
 public class Request {
 
@@ -18,13 +17,12 @@ public class Request {
     private Timestamp date;
     private String owner;
     private String resolver;
-    private Double latitude;
-    private Double longitude;
+    private GeoPoint location;
 
     public Request() {}
 
     public Request(String id, String title, String description, Timestamp date, RequestType type,
-                   RequestStatus status, Double longitude, Double latitude, String owner, String resolver) {
+                   RequestStatus status, GeoPoint location, String owner, String resolver) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -32,8 +30,7 @@ public class Request {
         this.type = type.getCode();
         this.status = status.getCode();
         this.owner = owner;
-        this.longitude = longitude;
-        this.latitude = latitude;
+        this.location = location;
         this.resolver = resolver;
     }
 
@@ -85,20 +82,12 @@ public class Request {
         this.status = status;
     }
 
-    public Double getLatitude() {
-        return latitude;
+    public GeoPoint getLocation() {
+        return location;
     }
 
-    public void setLatitude(Double latitude) {
-        this.latitude = latitude;
-    }
-
-    public Double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(Double longitude) {
-        this.longitude = longitude;
+    public void setLocation(GeoPoint location) {
+        this.location = location;
     }
 
     public String getOwner() {
@@ -132,5 +121,8 @@ public class Request {
         return getId().hashCode();
     }
 
-
+    @Override
+    public String toString() {
+        return title;
+    }
 }

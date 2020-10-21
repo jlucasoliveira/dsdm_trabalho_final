@@ -1,7 +1,6 @@
 package br.ufc.quixada.dsdm.meempresta;
 
 import android.content.Intent;
-import android.widget.Toast;
 import androidx.fragment.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -21,11 +20,10 @@ import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FindRequestsActivity extends FragmentActivity implements OnMapReadyCallback,
-        GoogleMap.OnMarkerClickListener {
+        GoogleMap.OnInfoWindowClickListener {
 
     private GoogleMap mMap;
     private OfflineUser offlineUser;
@@ -51,7 +49,7 @@ public class FindRequestsActivity extends FragmentActivity implements OnMapReady
         mMap = googleMap;
         mMap.setMyLocationEnabled(true);
         mMap.setMinZoomPreference(10);
-        mMap.setOnMarkerClickListener(this);
+        mMap.setOnInfoWindowClickListener(this);
 
         String userId = offlineUser.getString(Constants.USER_ID);
 
@@ -60,19 +58,18 @@ public class FindRequestsActivity extends FragmentActivity implements OnMapReady
                 if (task.isSuccessful()) {
                     User user = task.getResult().toObject(User.class);
                     assert user != null;
-                    LatLng myLocation = new LatLng(user.getLatitude(), user.getLongitude());
+                    LatLng myLocation = new LatLng(user.getLocation().getLatitude(), user.getLocation().getLongitude());
                     mMap.moveCamera(CameraUpdateFactory.newLatLng(myLocation));
 
-                    //.whereNotEqualTo("owner", userId)
                     mFirestore.collection(DBCollections.REQUEST_COLLECTION)
+                    .whereNotEqualTo("owner", userId)
                     .whereEqualTo("status", RequestStatus.NEW.getCode())
                     .get().addOnCompleteListener(task1 -> {
                         if (task1.isSuccessful()) {
-                            requests = task1.getResult().toObjects(Request.class);
-                            requests.forEach(r -> {
+                            task1.getResult().toObjects(Request.class).forEach(r -> {
                                 mMap.addMarker(new MarkerOptions()
                                     .title(r.getTitle())
-                                    .position(new LatLng(r.getLatitude(), r.getLongitude()))
+                                    .position(new LatLng(r.getLocation().getLatitude(),  r.getLocation().getLongitude()))
                                     .icon(DrawableToBitmap.getIcon(this, r.getType()))
                                 ).setTag(r);
                             });
@@ -83,16 +80,17 @@ public class FindRequestsActivity extends FragmentActivity implements OnMapReady
     }
 
     @Override
-    public boolean onMarkerClick(Marker marker) {
+    public void onInfoWindowClick(Marker marker) {
         Request r = (Request) marker.getTag();
+
         Intent intent = new Intent(this, DealActivity.class);
         intent.setAction(Constants.HELP_SOMEONE);
         intent.putExtra(Constants.REQUEST_ID, r.getId());
         intent.putExtra(Constants.REQUEST_TITLE, r.getTitle());
+        intent.putExtra(Constants.REQUEST_OWNER, r.getOwner());
         intent.putExtra(Constants.REQUEST_STATUS, r.getStatus());
         intent.putExtra(Constants.REQUEST_LOAN_DATE, r.getDate());
         intent.putExtra(Constants.REQUEST_DESCRIPTION, r.getDescription());
         startActivity(intent);
-        return false;
     }
 }

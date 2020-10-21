@@ -15,6 +15,7 @@ import br.ufc.quixada.dsdm.meempresta.R;
 import br.ufc.quixada.dsdm.meempresta.Models.Request;
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestType;
 import br.ufc.quixada.dsdm.meempresta.utils.Constants;
+import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -39,6 +40,7 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull RecordListAdapter.ViewHolder holder, int position) {
         Request request = mRequests.get(position);
+        String userID = new OfflineUser(mContext).getString(Constants.USER_ID);
         holder.txtTitle.setText('[' + RequestType.toEnum(request.getType()).getDescription() + "] "
                 + request.getTitle());
         holder.txtDescription.setText(request.getDescription());
@@ -46,7 +48,9 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Vi
                 new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm").format(request.getDate().toDate())
         );
 
-        if (request.getStatus().equals(RequestStatus.NEW.getCode()))
+        if (!request.getOwner().equals(userID))
+            holder.imgStatus.setImageResource(R.drawable.ic_lifesaver);
+        else if (request.getStatus().equals(RequestStatus.NEW.getCode()))
             holder.imgStatus.setImageResource(R.drawable.ic_baseline_new_24);
         else if (request.getStatus().equals(RequestStatus.DONE.getCode()))
             holder.imgStatus.setImageResource(R.drawable.ic_baseline_done_24);
@@ -55,10 +59,12 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Vi
         else if (request.getStatus().equals(RequestStatus.PENDING.getCode()))
             holder.imgStatus.setImageResource(R.drawable.ic_baseline_pending_24);
 
+
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, DealActivity.class);
             intent.putExtra(Constants.REQUEST_ID, request.getId());
             intent.putExtra(Constants.REQUEST_TITLE, request.getTitle());
+            intent.putExtra(Constants.REQUEST_OWNER, request.getOwner());
             intent.putExtra(Constants.REQUEST_STATUS, request.getStatus());
             intent.putExtra(Constants.REQUEST_LOAN_DATE, request.getDate());
             intent.putExtra(Constants.REQUEST_DESCRIPTION, request.getDescription());

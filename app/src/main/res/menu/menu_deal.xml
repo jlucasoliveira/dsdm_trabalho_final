@@ -6,11 +6,15 @@
             android:icon="@drawable/ic_baseline_done_24" android:id="@+id/done_request"/>
 
     <item
-            android:title="@string/cancel" app:showAsAction="ifRoom"
+            android:title="@string/cancel" app:showAsAction="always"
             android:icon="@drawable/ic_baseline_cancel_24" android:id="@+id/cancel_request"/>
 
     <item
-            android:title="@string/remove" app:showAsAction="ifRoom"
+            android:title="@string/remove" app:showAsAction="always"
             android:icon="@drawable/ic_baseline_remove_circle_outline_24" android:id="@+id/delete_request"/>
 
+    <item
+            android:title="@string/accept" app:showAsAction="always"
+            android:icon="@drawable/ic_handshake" android:id="@+id/accept_request"
+            android:visible="false"/>
 </menu>

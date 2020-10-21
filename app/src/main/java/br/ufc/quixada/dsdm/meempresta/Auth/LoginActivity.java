@@ -20,12 +20,12 @@ import com.google.firebase.firestore.FirebaseFirestore;
 public class LoginActivity extends AppCompatActivity {
 
     FirebaseAuth mAuth;
-    FirebaseFirestore mFirestore;
     OfflineUser offlineUser;
+    FirebaseFirestore mFirestore;
 
     Button mBtnLogin, mBtnSignUp;
-    EditText mEditEmail, mEditPassword;
     ProgressBar mProgressBarLogin;
+    EditText mEditEmail, mEditPassword;
 
     @Override
     protected void onStart() {
