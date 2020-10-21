@@ -25,7 +25,7 @@
             android:id="@+id/edit_login_email" android:layout_marginHorizontal="24dp"
             android:layout_alignParentStart="true" android:layout_marginTop="8dp"
             android:layout_alignParentEnd="true" android:layout_below="@id/txt_login_email"
-            android:labelFor="@id/txt_username"/>
+            />
 
     <TextView
             android:layout_width="wrap_content"

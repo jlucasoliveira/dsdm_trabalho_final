@@ -2,6 +2,7 @@ package br.ufc.quixada.dsdm.meempresta.Fragments;
 
 import android.os.Bundle;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,11 +13,11 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import br.ufc.quixada.dsdm.meempresta.R;
 import br.ufc.quixada.dsdm.meempresta.Adapters.RecordListAdapter;
 import br.ufc.quixada.dsdm.meempresta.Models.Request;
+import br.ufc.quixada.dsdm.meempresta.utils.Constants;
 import br.ufc.quixada.dsdm.meempresta.utils.DBCollections;
-import br.ufc.quixada.dsdm.meempresta.utils.ToastMessage;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
+import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +28,7 @@ public class RecordFragment extends Fragment {
     RecyclerView mRecyclerView;
     SwipeRefreshLayout mRefresh;
 
-    private FirebaseUser mUser;
+    private OfflineUser offlineUser;
     private FirebaseFirestore mFirestore;
 
     private RecordListAdapter mRecordAdapter;
@@ -50,17 +51,18 @@ public class RecordFragment extends Fragment {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
+        offlineUser = new OfflineUser(getContext());
         mFirestore = FirebaseFirestore.getInstance();
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
+        mRefresh.setOnRefreshListener(this::loadRecords);
 
         loadRecords();
 
-        mRefresh.setOnRefreshListener(this::loadRecords);
         return view;
     }
 
     public void loadRecords() {
-        mFirestore.collection(DBCollections.REQUEST_COLLECTION).whereEqualTo("owner", mUser.getUid())
+        String uid = offlineUser.getString(Constants.USER_ID);
+        mFirestore.collection(DBCollections.REQUEST_COLLECTION).whereEqualTo("owner", uid)
         .get().addOnCompleteListener(task -> {
             if (task.isSuccessful()) {
                 mRecords.clear();
@@ -71,7 +73,7 @@ public class RecordFragment extends Fragment {
                 mRefresh.setRefreshing(false);
             }
             else {
-                ToastMessage.showMessage(getContext(), "Ocorreu um erro");
+                Toast.makeText(getContext(), "Ocorreu um erro", Toast.LENGTH_SHORT).show();
             }
         });
     }

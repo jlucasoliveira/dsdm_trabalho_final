@@ -21,8 +21,8 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    ViewPager2 mViewPager;
     TabLayout mTabLayout;
+    ViewPager2 mViewPager;
     TabAdapter tabAdapter;
 
     private final List<Integer> mTabIcons = new ArrayList<>(2);
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onStart() {
         super.onStart();
         if (mAuth.getCurrentUser() == null) {
-            Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
             startActivity(intent);
             finish();
         }
@@ -77,18 +77,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         Integer itemId = item.getItemId();
-        if (itemId.equals(R.id.action_bar_edit_profile))
-            startActivity(new Intent(this, EditProfileActivity.class));
-        else if (itemId.equals(R.id.action_bar_share_app)) {
+        if (itemId.equals(R.id.action_bar_share_app)) {
             Intent sendIntent = new Intent();
             sendIntent.setAction(Intent.ACTION_SEND);
             sendIntent.putExtra(Intent.EXTRA_TEXT, "Recomendo que não compartilhe o app!!!");
             sendIntent.setType("text/plain");
-            Intent shareIntent = Intent.createChooser(sendIntent, "Compartilhar app");
+            Intent shareIntent = Intent.createChooser(sendIntent, null);
             startActivity(shareIntent);
         }
-        else if (itemId.equals(R.id.action_bar_about_app))
-            startActivity(new Intent(this, AboutAppActivity.class));
         else if (itemId.equals(R.id.action_bar_logoff)){
             mAuth.signOut();
             startActivity(new Intent(this, LoginActivity.class));
@@ -96,5 +92,13 @@ public class MainActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (mViewPager.getCurrentItem() == 0)
+            super.onBackPressed();
+        else
+            mViewPager.setCurrentItem(mViewPager.getCurrentItem() - 1);
     }
 }

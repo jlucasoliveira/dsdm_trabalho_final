@@ -5,16 +5,24 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import br.ufc.quixada.dsdm.meempresta.MainActivity;
+import br.ufc.quixada.dsdm.meempresta.Models.User;
 import br.ufc.quixada.dsdm.meempresta.R;
-import br.ufc.quixada.dsdm.meempresta.utils.ToastMessage;
+import br.ufc.quixada.dsdm.meempresta.utils.Constants;
+import br.ufc.quixada.dsdm.meempresta.utils.DBCollections;
+import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+    FirebaseAuth mAuth;
+    FirebaseFirestore mFirestore;
+    OfflineUser offlineUser;
+
     Button mBtnLogin, mBtnSignUp;
     EditText mEditEmail, mEditPassword;
     ProgressBar mProgressBarLogin;
@@ -40,6 +48,10 @@ public class LoginActivity extends AppCompatActivity {
         mEditEmail = findViewById(R.id.edit_login_email);
         mEditPassword = findViewById(R.id.edit_login_password);
         mProgressBarLogin = findViewById(R.id.progressBar_login);
+
+        mAuth = FirebaseAuth.getInstance();
+        mFirestore = FirebaseFirestore.getInstance();
+        offlineUser = new OfflineUser(this);
 
         mBtnLogin.setOnClickListener(this::onClickLogin);
         mBtnSignUp.setOnClickListener(this::onClickSignUp);
@@ -68,11 +80,16 @@ public class LoginActivity extends AppCompatActivity {
         mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
             mProgressBarLogin.setVisibility(View.INVISIBLE);
             if (task.isSuccessful()) {
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
-                finish();
+                mFirestore.collection(DBCollections.USER_COLLECTION).whereEqualTo("email", email)
+                .get().addOnCompleteListener(user -> {
+                    String uid = user.getResult().toObjects(User.class).get(0).getId();
+                    offlineUser.storeString(Constants.USER_ID, uid);
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    finish();
+                });
             }
             else {
-                ToastMessage.showMessage(this, task.getException().getMessage());
+                Toast.makeText(this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
 

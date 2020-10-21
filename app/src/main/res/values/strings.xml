@@ -18,6 +18,7 @@
     <string name="txt_logoff">Sair</string>
     <string name="yes">Sim</string>
     <string name="no">Não</string>
+    <string name="next">Próximo</string>
 
     <!-- Deal menu -->
     <string name="done">Concluir</string>
@@ -35,7 +36,10 @@
     <string name="txt_save">Salvar</string>
     <string name="txt_signup">Cadastre-se</string>
     <string name="txt_email">Email</string>
+    <string name="txt_address">Endereço</string>
+    <string name="hint_address">Rua, Nº, Bairro, Cidade, UF</string>
 
+    <!-- Login -->
     <string name="txt_login">Entrar</string>
     <string name="txt_cancel">Cancelar</string>
     <string name="txt_profile_pic">Foto do Perfil</string>
@@ -117,5 +121,8 @@
 
     <string name="txt_share_app">Compartilhar</string>
     <string name="txt_request">Requisitar</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_find_requests">Map</string>
 
 </resources>

@@ -12,8 +12,10 @@ import android.os.Bundle;
 import br.ufc.quixada.dsdm.meempresta.Models.Request;
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestStatus;
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestType;
+import br.ufc.quixada.dsdm.meempresta.utils.Constants;
 import br.ufc.quixada.dsdm.meempresta.utils.DBCollections;
-import br.ufc.quixada.dsdm.meempresta.utils.ToastMessage;
+import br.ufc.quixada.dsdm.meempresta.utils.OfflineUser;
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -25,15 +27,11 @@ import java.io.File;
 
 public class RequestActivity extends AppCompatActivity {
 
-    private final int IMAGE_UPLOAD = 0;
-
     private final ViewHolder mViewHolder = new ViewHolder();
 
-    FirebaseUser mUser;
+    OfflineUser offlineUser;
     StorageReference mStorage;
     FirebaseFirestore mFirestore;
-
-    Uri requestImageUri = Uri.EMPTY;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,8 +50,9 @@ public class RequestActivity extends AppCompatActivity {
         mViewHolder.seekBarDistance = findViewById(R.id.seekBar_distance);
 
         mFirestore = FirebaseFirestore.getInstance();
-        mUser = FirebaseAuth.getInstance().getCurrentUser();
         mStorage = FirebaseStorage.getInstance().getReference();
+
+        offlineUser = new OfflineUser(this);
 
         mViewHolder.btnRequest.setOnClickListener(this::sendRequest);
         mViewHolder.imgUploadImage.setOnClickListener(this::openImage);
@@ -63,14 +62,10 @@ public class RequestActivity extends AppCompatActivity {
     }
 
     public void sendRequest( View v ) {
-        StorageReference requestImages = null;
-        Integer distance = 2 + mViewHolder.seekBarDistance.getProgress();
+        String uid = offlineUser.getString(Constants.USER_ID);
         String title = mViewHolder.editFirstField.getText().toString().trim();
         String description = mViewHolder.editDescription.getText().toString().trim();
         RequestType requestType = RequestType.toEnum(getIntent().getExtras().getInt(RequestType.REQUEST_TYPE.name()));
-
-        if (requestImageUri != Uri.EMPTY)
-            requestImages = mStorage.child("requests/" + requestImageUri.getLastPathSegment());
 
         if (title.isEmpty()) {
             mViewHolder.editFirstField.setError("Campo obrigatório!");
@@ -82,39 +77,32 @@ public class RequestActivity extends AppCompatActivity {
             return;
         }
 
-        Request request = new Request(null, title, description, distance,
-                Timestamp.now(), requestType, RequestStatus.NEW, mUser, null);
-
-        mViewHolder.btnRequest.setEnabled(false);
-
-        StorageReference finalRequestImages = requestImages;
-        mFirestore.collection(DBCollections.REQUEST_COLLECTION).add(request).addOnCompleteListener(task -> {
-            if(task.isSuccessful()){
-                if (finalRequestImages != null)
-                    finalRequestImages.putFile(requestImageUri).addOnCompleteListener(taskImage -> {
-
-                    });
-
-                ToastMessage.showMessage(this,"Requisição realizada com sucesso!");
-                finish();
-            }
-            else {
-                ToastMessage.showMessage(this, task.getException().getMessage());
-                mViewHolder.btnRequest.setEnabled(true);
-            }
+        mFirestore.collection(DBCollections.USER_COLLECTION).document(uid).get().addOnCompleteListener(user -> {
+            Double longitude = user.getResult().getDouble("longitude");
+            Double latitude = user.getResult().getDouble("latitude");
+            Request request = new Request(null, title, description, Timestamp.now(), requestType, RequestStatus.NEW,
+                    longitude, latitude, uid, null);
+            mFirestore.collection(DBCollections.REQUEST_COLLECTION).add(request).addOnCompleteListener(task -> {
+                if(task.isSuccessful()){
+                    Toast.makeText(this,"Requisição realizada com sucesso!", Toast.LENGTH_SHORT).show();
+                    finish();
+                }
+                else
+                    Toast.makeText(this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+            });
         });
     }
 
     public void openImage(View v) {
         Intent intent = new Intent();
         intent.setAction(MediaStore.ACTION_IMAGE_CAPTURE_SECURE);
-        startActivityForResult(intent, IMAGE_UPLOAD);
+        startActivityForResult(intent, Constants.IMAGE_UPLOAD);
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == IMAGE_UPLOAD && resultCode == RESULT_OK && data != null && data.getData() != null) {
+        if (requestCode == Constants.IMAGE_UPLOAD && resultCode == RESULT_OK && data != null && data.getData() != null) {
 
         }
     }

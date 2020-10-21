@@ -21,12 +21,11 @@
             android:layout_width="wrap_content" android:layout_height="wrap_content"
             android:id="@+id/txt_description_record" android:layout_below="@id/txt_title_record"
             android:layout_alignParentStart="true" tools:text="TESTAsSo"
-            android:textSize="16sp" android:ellipsize="end" android:layout_alignEnd="@id/img_done_request"/>
+            android:textSize="16sp" android:ellipsize="end" android:layout_alignEnd="@id/img_status_request"/>
 
     <ImageView
             android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/img_done_request" android:src="@drawable/ic_baseline_done_24"
-            android:layout_below="@id/loan_date_record" android:layout_alignParentEnd="true"
-            android:visibility="gone"/>
+            android:id="@+id/img_status_request" android:src="@drawable/ic_baseline_done_24"
+            android:layout_below="@id/loan_date_record" android:layout_alignParentEnd="true"/>
 
 </RelativeLayout>

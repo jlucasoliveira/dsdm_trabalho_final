@@ -9,7 +9,7 @@
 
         <androidx.recyclerview.widget.RecyclerView
                 android:layout_width="match_parent" android:layout_height="match_parent"
-                android:id="@+id/record_list" tools:listitem="@layout/record_item"
+                android:id="@+id/record_list" tools:listitem="@layout/item_record"
                 android:layout_alignParentTop="true" android:layout_alignParentStart="true"/>
 
         <ProgressBar

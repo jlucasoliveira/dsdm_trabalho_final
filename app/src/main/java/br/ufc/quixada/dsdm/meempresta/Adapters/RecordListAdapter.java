@@ -14,6 +14,7 @@ import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestStatus;
 import br.ufc.quixada.dsdm.meempresta.R;
 import br.ufc.quixada.dsdm.meempresta.Models.Request;
 import br.ufc.quixada.dsdm.meempresta.Models.enums.RequestType;
+import br.ufc.quixada.dsdm.meempresta.utils.Constants;
 
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -31,7 +32,7 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.record_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_record, parent, false);
         return new ViewHolder(view);
     }
 
@@ -42,17 +43,25 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Vi
                 + request.getTitle());
         holder.txtDescription.setText(request.getDescription());
         holder.txtLoanDate.setText(
-                new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm").format(request.getData().toDate())
+                new SimpleDateFormat("dd/MM/yyyy 'às' HH:mm").format(request.getDate().toDate())
         );
 
-        if (request.getStatus().equals(RequestStatus.DONE.getCode())) holder.imgDone.setVisibility(View.VISIBLE);
+        if (request.getStatus().equals(RequestStatus.NEW.getCode()))
+            holder.imgStatus.setImageResource(R.drawable.ic_baseline_new_24);
+        else if (request.getStatus().equals(RequestStatus.DONE.getCode()))
+            holder.imgStatus.setImageResource(R.drawable.ic_baseline_done_24);
+        else if (request.getStatus().equals(RequestStatus.CANCELED.getCode()))
+            holder.imgStatus.setImageResource(R.drawable.ic_baseline_cancel_24);
+        else if (request.getStatus().equals(RequestStatus.PENDING.getCode()))
+            holder.imgStatus.setImageResource(R.drawable.ic_baseline_pending_24);
 
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(mContext, DealActivity.class);
-            intent.putExtra("r_id", request.getId());
-            intent.putExtra("r_title", request.getTitle());
-            intent.putExtra("r_description", request.getDescription());
-            intent.putExtra("r_date", request.getData());
+            intent.putExtra(Constants.REQUEST_ID, request.getId());
+            intent.putExtra(Constants.REQUEST_TITLE, request.getTitle());
+            intent.putExtra(Constants.REQUEST_STATUS, request.getStatus());
+            intent.putExtra(Constants.REQUEST_LOAN_DATE, request.getDate());
+            intent.putExtra(Constants.REQUEST_DESCRIPTION, request.getDescription());
             mContext.startActivity(intent);
         });
     }
@@ -64,14 +73,14 @@ public class RecordListAdapter extends RecyclerView.Adapter<RecordListAdapter.Vi
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
 
-        ImageView imgDone;
+        ImageView imgStatus;
         TextView txtTitle;
         TextView txtLoanDate;
         TextView txtDescription;
 
         ViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgDone = itemView.findViewById(R.id.img_done_request);
+            imgStatus = itemView.findViewById(R.id.img_status_request);
             txtTitle = itemView.findViewById(R.id.txt_title_record);
             txtLoanDate = itemView.findViewById(R.id.loan_date_record);
             txtDescription = itemView.findViewById(R.id.txt_description_record);

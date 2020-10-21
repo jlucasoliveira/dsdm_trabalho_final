@@ -1,75 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent" android:layout_height="match_parent"
         tools:context=".Auth.SignupActivity" android:isScrollContainer="true"
         android:focusableInTouchMode="true" android:focusable="true">
 
-    <TextView
-            android:text="@string/txt_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_sign_up_name"
-            android:layout_alignParentTop="true" android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp" android:layout_marginTop="48dp" android:textSize="18sp"/>
+    <RelativeLayout
+            android:layout_width="match_parent" android:layout_height="wrap_content">
 
-    <EditText
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:inputType="textPersonName" android:ems="10"
-            android:id="@+id/edit_sign_up_name" android:layout_below="@id/txt_sign_up_name"
-            android:layout_marginTop="8dp" android:layout_alignParentStart="true"
-            android:layout_alignParentEnd="true" android:layout_marginHorizontal="16dp"/>
+        <TextView
+                android:text="@string/txt_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_sign_up_name"
+                android:layout_alignParentTop="true" android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp" android:layout_marginTop="24dp" android:textSize="18sp"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_sign_up_email"
-            android:layout_below="@id/edit_sign_up_name"
-            android:layout_marginTop="8dp" android:layout_alignParentStart="true"
-            android:layout_marginStart="16dp" android:text="@string/txt_email" android:textSize="18sp"/>
+        <EditText
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:inputType="textPersonName" android:ems="10"
+                android:id="@+id/edit_sign_up_name" android:layout_below="@id/txt_sign_up_name"
+                android:layout_marginTop="8dp" android:layout_alignParentStart="true"
+                android:layout_alignParentEnd="true" android:layout_marginHorizontal="16dp"/>
 
-    <EditText
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:inputType="textEmailAddress" android:layout_marginHorizontal="16dp"
-            android:ems="10" android:id="@+id/edit_sign_up_email"
-            android:layout_alignParentStart="true" android:layout_marginTop="8dp"
-            android:layout_alignParentEnd="true" android:layout_below="@id/txt_sign_up_email"
-            android:labelFor="@id/txt_username"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_sign_up_email"
+                android:layout_below="@id/edit_sign_up_name"
+                android:layout_marginTop="8dp" android:layout_alignParentStart="true"
+                android:layout_marginStart="16dp" android:text="@string/txt_email" android:textSize="18sp"/>
 
-    <TextView
-            android:layout_width="wrap_content" android:layout_height="wrap_content"
-            android:id="@+id/txt_sign_up_password"
-            android:layout_alignParentStart="true" android:layout_marginStart="16dp"
-            android:layout_below="@id/edit_sign_up_email" android:layout_marginTop="8dp"
-            android:text="@string/txt_password" android:textSize="18sp"/>
+        <EditText
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:inputType="textEmailAddress" android:layout_marginHorizontal="16dp"
+                android:ems="10" android:id="@+id/edit_sign_up_email"
+                android:layout_alignParentStart="true" android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true" android:layout_below="@id/txt_sign_up_email"/>
 
-    <EditText
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:inputType="textPassword" android:ems="10"
-            android:id="@+id/edit_sign_up_password" android:layout_marginHorizontal="16dp"
-            android:layout_below="@id/txt_sign_up_password" android:layout_marginTop="8dp"
-            android:layout_alignParentEnd="true" android:layout_alignParentStart="true"/>
+        <TextView
+                android:layout_width="wrap_content" android:layout_height="wrap_content"
+                android:id="@+id/txt_sign_up_password"
+                android:layout_alignParentStart="true" android:layout_marginStart="16dp"
+                android:layout_below="@id/edit_sign_up_email" android:layout_marginTop="8dp"
+                android:text="@string/txt_password" android:textSize="18sp"/>
 
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" android:id="@+id/txt_sign_up_confirm_password"
-            android:layout_alignParentStart="true" android:layout_marginStart="16dp"
-            android:layout_below="@id/edit_sign_up_password" android:layout_marginTop="8dp"
-            android:text="@string/txt_confirm_password" android:textSize="18sp"/>
+        <EditText
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:inputType="textPassword" android:ems="10"
+                android:id="@+id/edit_sign_up_password" android:layout_marginHorizontal="16dp"
+                android:layout_below="@id/txt_sign_up_password" android:layout_marginTop="8dp"
+                android:layout_alignParentEnd="true" android:layout_alignParentStart="true"/>
 
-    <EditText
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:inputType="textPassword" android:ems="10"
-            android:id="@+id/edit_sign_up_confirm_password" android:layout_marginHorizontal="16dp"
-            android:layout_below="@id/txt_sign_up_confirm_password" android:layout_alignParentEnd="true"
-            android:layout_alignParentStart="true" android:layout_marginTop="8dp"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_sign_up_confirm_password"
+                android:layout_alignParentStart="true" android:layout_marginStart="16dp"
+                android:layout_below="@id/edit_sign_up_password" android:layout_marginTop="8dp"
+                android:text="@string/txt_confirm_password" android:textSize="18sp"/>
 
-    <Button
-            android:layout_width="0dp" android:layout_height="wrap_content"
-            android:text="@string/txt_signup" android:id="@+id/btn_sign_up"
-            android:layout_marginHorizontal="16dp" android:layout_marginTop="18dp"
-            android:paddingTop="20dp" android:paddingBottom="20dp"
-            android:layout_alignParentEnd="true" android:layout_alignParentStart="true"
-            android:layout_below="@id/edit_sign_up_confirm_password" android:textSize="18sp"
-            android:backgroundTint="@color/colorAccent" android:textColor="@android:color/white"/>
+        <EditText
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:inputType="textPassword" android:ems="10"
+                android:id="@+id/edit_sign_up_confirm_password" android:layout_marginHorizontal="16dp"
+                android:layout_below="@id/txt_sign_up_confirm_password" android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true" android:layout_marginTop="8dp"/>
 
-</RelativeLayout>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" android:id="@+id/txt_sign_up_address"
+                android:layout_alignParentStart="true" android:layout_marginStart="16dp"
+                android:layout_below="@id/edit_sign_up_confirm_password" android:layout_marginTop="8dp"
+                android:text="@string/txt_address" android:textSize="18sp"/>
+
+        <EditText
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:inputType="text" android:ems="10"
+                android:id="@+id/edit_sign_up_address" android:layout_marginHorizontal="16dp"
+                android:layout_below="@id/txt_sign_up_address" android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true" android:layout_marginTop="8dp"
+                android:hint="@string/hint_address"/>
+
+        <Button
+                android:layout_width="0dp" android:layout_height="wrap_content"
+                android:text="@string/txt_signup" android:id="@+id/btn_sign_up"
+                android:layout_marginHorizontal="16dp" android:layout_marginTop="18dp"
+                android:paddingTop="20dp" android:paddingBottom="20dp"
+                android:layout_alignParentEnd="true" android:layout_alignParentStart="true"
+                android:layout_below="@id/edit_sign_up_address" android:textSize="18sp"
+                android:backgroundTint="@color/colorAccent" android:textColor="@android:color/white"/>
+
+    </RelativeLayout>
+</ScrollView>

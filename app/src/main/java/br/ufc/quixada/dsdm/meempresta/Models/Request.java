@@ -13,26 +13,27 @@ public class Request {
     private String id;
     private String title;
     private String description;
-    private Integer distance;
     private Integer type;
     private Integer status;
-    private Timestamp data;
+    private Timestamp date;
     private String owner;
     private String resolver;
-    private LatLng local;
+    private Double latitude;
+    private Double longitude;
 
     public Request() {}
 
-    public Request(String id, String title, String description, Integer distance, Timestamp data,
-                   RequestType type, RequestStatus status, FirebaseUser owner, String resolver) {
+    public Request(String id, String title, String description, Timestamp date, RequestType type,
+                   RequestStatus status, Double longitude, Double latitude, String owner, String resolver) {
         this.id = id;
         this.title = title;
         this.description = description;
-        this.distance = distance;
-        this.data = data;
+        this.date = date;
         this.type = type.getCode();
         this.status = status.getCode();
-        this.owner = owner.getUid();
+        this.owner = owner;
+        this.longitude = longitude;
+        this.latitude = latitude;
         this.resolver = resolver;
     }
 
@@ -60,20 +61,12 @@ public class Request {
         this.description = description;
     }
 
-    public Timestamp getData() {
-        return data;
+    public Timestamp getDate() {
+        return date;
     }
 
-    public void setData(Timestamp data) {
-        this.data = data;
-    }
-
-    public Integer getDistance() {
-        return distance;
-    }
-
-    public void setDistance(Integer distance) {
-        this.distance = distance;
+    public void setDate(Timestamp date) {
+        this.date = date;
     }
 
     public Integer getType() {
@@ -90,6 +83,22 @@ public class Request {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     public String getOwner() {

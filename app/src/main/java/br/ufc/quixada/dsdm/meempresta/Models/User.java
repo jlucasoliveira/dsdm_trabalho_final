@@ -1,5 +1,6 @@
 package br.ufc.quixada.dsdm.meempresta.Models;
 
+import com.google.android.gms.maps.model.LatLng;
 import com.google.firebase.firestore.DocumentId;
 
 public class User {
@@ -10,15 +11,20 @@ public class User {
     private String nome;
     private String email;
 
-    private double avaliacao;
+    private Double avaliacao;
+
+    private Double latitude;
+    private Double longitude;
 
     public User() {}
 
-    public User(String id, String nome, String email, double avaliacao) {
+    public User(String id, String nome, String email, Double avaliacao, LatLng latLng) {
         this.id = id;
         this.nome = nome;
         this.email = email;
         this.avaliacao = avaliacao;
+        this.latitude = latLng.latitude;
+        this.longitude = latLng.longitude;
     }
 
     public String getId() {
@@ -45,12 +51,28 @@ public class User {
         this.email = email;
     }
 
-    public double getAvaliacao() {
+    public Double getAvaliacao() {
         return avaliacao;
     }
 
-    public void setAvaliacao(double avaliacao) {
+    public void setAvaliacao(Double avaliacao) {
         this.avaliacao = avaliacao;
+    }
+
+    public Double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(Double latitude) {
+        this.latitude = latitude;
+    }
+
+    public Double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(Double longitude) {
+        this.longitude = longitude;
     }
 
     @Override
